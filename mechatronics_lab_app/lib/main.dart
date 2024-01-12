@@ -3,7 +3,8 @@ import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_not
 import 'package:flutter/material.dart';
 
 import 'num_of_egg_page.dart';
-import 'shopping.dart';
+import 'shopping_page.dart';
+import 'settings_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -35,9 +37,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _pageController = PageController(initialPage: 0);
+  final _pageController = PageController(initialPage: 1);
 
-  final _controller = NotchBottomBarController(index: 0);
+  final _controller = NotchBottomBarController(index: 1);
 
   int maxCount = 3;
 
@@ -49,15 +51,37 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// widget list
   final List<Widget> bottomBarPages = [
-    EggNumPage(),
     ShoppingPage(),
+    EggNumPage(),
+    SettingsPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Egg Num App'),
+        title: Text(
+          'Egg Num App',
+          style: TextStyle(color: Colors.white),  
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.share,
+              color: Colors.white,
+            ),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+            onPressed: () {},
+          )
+        ],
       ),
       body: PageView(
         controller: _pageController,
@@ -79,36 +103,36 @@ class _MyHomePageState extends State<MyHomePage> {
               bottomBarItems: [
                 const BottomBarItem(
                   inActiveItem: Icon(
-                    Icons.home_filled,
+                    Icons.shopping_cart,
                     color: Colors.blueGrey,
                   ),
                   activeItem: Icon(
-                    Icons.home_filled,
+                    Icons.shopping_cart,
                     color: Colors.blueAccent,
                   ),
                   itemLabel: 'Page 1',
                 ),
                 const BottomBarItem(
                   inActiveItem: Icon(
-                    Icons.shopping_cart,
+                    Icons.home_filled,
                     color: Colors.blueGrey,
                   ),
                   activeItem: Icon(
-                    Icons.shopping_cart,
+                    Icons.home_filled,
                     color: Colors.blueAccent,
                   ),
                   itemLabel: 'Page 2',
                 ),
                 const BottomBarItem(
                   inActiveItem: Icon(
-                    Icons.settings,
+                    Icons.account_circle,
                     color: Colors.blueGrey,
                   ),
                   activeItem: Icon(
-                    Icons.settings,
-                    color: Colors.pink,
+                    Icons.account_circle,
+                    color: Colors.blueAccent,
                   ),
-                  itemLabel: 'Page 4',
+                  itemLabel: 'Page 3',
                 ),
               ],
               onTap: (index) {

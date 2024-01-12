@@ -72,7 +72,7 @@ class _EggNumWidgetState extends State<EggNumWidget> {
             children: [
               Container(
                 child: Text(
-                  '現在の卵の個数は' + countEggs(snapshot.data) + '個です。',
+                  '現在の卵の個数は${countEggs(snapshot.data)}個です。',
                   style: TextStyle(
                     fontSize: 24,
                   ),
@@ -86,8 +86,10 @@ class _EggNumWidgetState extends State<EggNumWidget> {
                     childAspectRatio: 0.7,
                     padding: EdgeInsets.only(top: 30),
                     crossAxisCount: 3,
-                    children: snapshot.data!.map((int eggData) {
-                      return EggWidget(eggData: eggData);
+                    children: snapshot.data!.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      int eggData = entry.value;
+                      return EggWidget(eggData: eggData, index: index);
                     }).toList(),
                   ),
                 ),
@@ -104,12 +106,14 @@ class EggWidget extends StatelessWidget {
   const EggWidget({
     Key? key,
     required this.eggData,
+    required this.index,
   }) : super(key: key);
 
   final int eggData;
+  final int index;
 
-  Color getEggColor() {
-    return eggData == 1 ? Colors.yellow : Colors.black;
+  String getEggImage() {
+    return eggData == 1 ? 'images/egg1.png' : 'images/broken_egg.png';
   }
 
   @override
@@ -119,14 +123,9 @@ class EggWidget extends StatelessWidget {
         Container(
           height: 100,
           width: 50,
-          decoration: BoxDecoration(
-            color: getEggColor(),
-            borderRadius: BorderRadius.all(
-              Radius.elliptical(50, 100),
-            )
-          ),
+          child: Image.asset(getEggImage()),
         ),
-        Text('test text'),
+        Text('${index+1}番目のボックス'),
       ],
     );
   }
