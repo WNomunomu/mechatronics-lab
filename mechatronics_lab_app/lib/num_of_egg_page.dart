@@ -3,31 +3,15 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-// Future<List<int>> fetchData() async {
-//   final apiUrl = 'https://script.google.com/macros/s/AKfycby7o065pPg70rQxnPG50EdyrO7f8VbdwXvZ2KPVFYismIv1RzhYdUzf4rxGljYN1Z66/exec';
-
-//   Map<String, dynamic> jsonData;
-
-//   try {
-//     final response = await http.get(Uri.parse(apiUrl));
-
-//     if (response.statusCode == 200) {
-//       jsonData = json.decode(response.body);
-//     } else {
-//       return [response.statusCode];
-//     }
-//   } catch (err) {
-//     return [];
-//   }
-
-//   String jsonDataString = jsonData['egg_data'].toString();
-
-//   List<int> eggDataArray = jsonDataString.split('').map((String digit) => int.parse(digit)).toList();
-
-//   print(eggDataArray);
-
-//   return eggDataArray;
-// }
+class EggNumPage extends StatelessWidget {
+  
+  @override
+  Widget build(BuildContext context) {
+    return (
+      EggNumWidget()
+    );
+  }
+}
 
 class EggNumWidget extends StatefulWidget {
   @override
@@ -62,28 +46,53 @@ class _EggNumWidgetState extends State<EggNumWidget> {
     }
   }
 
+  String countEggs(List<int>? list) {
+
+    if (list == null) {
+      return '';
+    }
+
+    int count = list.where((element) => element == 1).length;
+    return count.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<int>>(
       future: eggDataFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator(); // データ取得中の表示
+          return CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (!snapshot.hasData) {
           return Text('No data available');
         } else {
-          return GridView.count(
-            padding: EdgeInsets.only(top: 30),
-            crossAxisCount: 3,
-            children: snapshot.data!.map((int eggData) {
-              return Column(
-                children: [
-                  EggWidget(eggData: eggData),
-                ],
-              );
-            }).toList(),
+          return Column(
+            children: [
+              Container(
+                child: Text(
+                  '現在の卵の個数は' + countEggs(snapshot.data) + '個です。',
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                ),
+                padding: EdgeInsets.only(top: 30),
+              ),
+              Expanded(
+                child: Container(
+                  height: 200,
+                  child: GridView.count(
+                    childAspectRatio: 0.7,
+                    padding: EdgeInsets.only(top: 30),
+                    crossAxisCount: 3,
+                    children: snapshot.data!.map((int eggData) {
+                      return EggWidget(eggData: eggData);
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ],
           );
         }
       },

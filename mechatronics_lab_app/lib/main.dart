@@ -3,6 +3,7 @@ import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_not
 import 'package:flutter/material.dart';
 
 import 'num_of_egg_page.dart';
+import 'shopping.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final _controller = NotchBottomBarController(index: 0);
 
-  int maxCount = 1;
+  int maxCount = 3;
 
   @override
   void dispose() {
@@ -48,7 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// widget list
   final List<Widget> bottomBarPages = [
-    EggNumWidget(),
+    EggNumPage(),
+    ShoppingPage(),
   ];
 
   @override
@@ -107,17 +109,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.pink,
                   ),
                   itemLabel: 'Page 4',
-                ),
-                const BottomBarItem(
-                  inActiveItem: Icon(
-                    Icons.person,
-                    color: Colors.blueGrey,
-                  ),
-                  activeItem: Icon(
-                    Icons.person,
-                    color: Colors.yellow,
-                  ),
-                  itemLabel: 'Page 5',
                 ),
               ],
               onTap: (index) {
