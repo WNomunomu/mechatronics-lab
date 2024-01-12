@@ -19,7 +19,7 @@ class ShoppingPage extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.only(top: 30),
-          child: Text(
+          child: const Text(
             'このページでは卵の購入ができます。',
             style: TextStyle(
               fontSize: 24,
@@ -27,7 +27,7 @@ class ShoppingPage extends StatelessWidget {
           ),
         ),
         Container(
-          padding: EdgeInsets.only(top: 30),
+          padding: const EdgeInsets.only(top: 30),
           child: ElevatedButton(
             onPressed: () {
               _launchUrl(_amazonLink);
@@ -35,13 +35,13 @@ class ShoppingPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   width: 40,
                   height: 40,
                   child: Image.asset('images/amazon_logo.png')
                 ),
-                SizedBox(width: 8),
-                Text(
+                const SizedBox(width: 8),
+                const Text(
                   'で卵を購入する',
                   style: TextStyle(
                     fontSize: 24,
@@ -52,7 +52,7 @@ class ShoppingPage extends StatelessWidget {
           ),
         ),
         Container(
-          padding: EdgeInsets.only(top: 30),
+          padding: const EdgeInsets.only(top: 30),
           child: ElevatedButton(
             onPressed: () {
               _launchUrl(_rakutenLink);
@@ -60,13 +60,13 @@ class ShoppingPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   width: 40,
                   height: 40,
                   child: Image.asset('images/rakuten_logo.png')
                 ),
-                SizedBox(width: 8),
-                Text(
+                const SizedBox(width: 8),
+                const Text(
                   'で卵を購入する',
                   style: TextStyle(
                     fontSize: 24,

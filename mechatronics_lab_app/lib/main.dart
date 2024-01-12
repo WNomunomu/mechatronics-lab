@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Egg Num App',
           style: TextStyle(color: Colors.white),  
         ),
@@ -68,14 +68,14 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.blue,
         actions: <Widget>[
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.share,
               color: Colors.white,
             ),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.settings,
               color: Colors.white,
             ),
@@ -100,8 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
               removeMargins: false,
               bottomBarWidth: 500,
               durationInMilliSeconds: 300,
-              bottomBarItems: [
-                const BottomBarItem(
+              bottomBarItems: const [
+                BottomBarItem(
                   inActiveItem: Icon(
                     Icons.shopping_cart,
                     color: Colors.blueGrey,
@@ -112,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   itemLabel: 'Page 1',
                 ),
-                const BottomBarItem(
+                BottomBarItem(
                   inActiveItem: Icon(
                     Icons.home_filled,
                     color: Colors.blueGrey,
@@ -123,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   itemLabel: 'Page 2',
                 ),
-                const BottomBarItem(
+                BottomBarItem(
                   inActiveItem: Icon(
                     Icons.account_circle,
                     color: Colors.blueGrey,
