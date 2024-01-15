@@ -5,22 +5,13 @@ const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
 const sheet = spreadsheet.getSheetByName(sheetName);
 
 const doPost = (e) => {
-  if (e == null || e.postData == null || e.postData.contents == null) return;
+  if (e == null || e.postData == null) return;
 
-  const requestJSON = e.postData.contents;
-  const requestObj = JSON.parse(requestJSON);
+  const inputData = JSON.parse(e.postData.getDataAsString());
 
-  const events = requestObj.events;
+  const eggData = inputData.eggData;
 
-  events.forEach((event) => {
-    if (event.type !== 'message') return;
-    const message = event.message;
-    if (message.type !== 'text') return;
-
-    const text = message.text;
-
-    setData(text);
-  })
+  setData(eggData);
 };
 
 const setData = (msg) => {
@@ -49,6 +40,8 @@ const doGet = (e) => {
     "date": date,
     "egg_data": egg_data,
   }
+
+  console.log(eggData);
 
   const jsonData = JSON.stringify(eggData);
 
